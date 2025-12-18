@@ -1,0 +1,78 @@
+  $ /Users/o.chetverykova/.nvm/versions/node/v20.19.6/bin/node -p require.resolve(     "react-native/scripts/react_native_pods.rb",     {paths: [process.argv[1]]},   ) /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios
+  /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/node_modules/react-native/scripts/react_native_pods.rb
+Found 2 modules for target `WriterlySpiritQuizRush`
+link_native_modules! {:ios_packages=>[{:configurations=>[], :name=>"react-native-safe-area-context", :root=>"/Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/node_modules/react-native-safe-area-context", :path=>"../node_modules/react-native-safe-area-context", :podspec_path=>"/Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec", :script_phases=>[]}, {:configurations=>[], :name=>"react-native-screens", :root=>"/Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/node_modules/react-native-screens", :path=>"../node_modules/react-native-screens", :podspec_path=>"/Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/node_modules/react-native-screens/RNScreens.podspec", :script_phases=>[]}], :ios_project_root_path=>"/Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios", :react_native_path=>"../node_modules/react-native"}
+Auto-linking React Native modules for target `WriterlySpiritQuizRush`: RNScreens and react-native-safe-area-context
+Framework build type is static library
+[36m[1m[Codegen][0m [33mwarn: using experimental new codegen integration[0m
+[36m[1m[Codegen][0m Adding script_phases to ReactCodegen.
+  $ /bin/mkdir -p ./build/generated/ios
+[36m[1m[Codegen][0m Generating ./build/generated/ios/ReactCodegen.podspec.json
+  $ /Users/o.chetverykova/.nvm/versions/node/v20.19.6/bin/node ./../node_modules/react-native/scripts/generate-codegen-artifacts.js -p /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios/.. -o /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios -t ios
+  [36m[1m[Codegen][0m Analyzing /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/package.json[0m
+  [36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the app.[0m
+  [36m[1m[Codegen][0m [33mThe "codegenConfig" field is not defined in package.json. Assuming there is nothing to generate at the app level.[0m
+  [36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the project dependencies.[0m
+  [36m[1m[Codegen][0m Found react-native[0m
+  [36m[1m[Codegen][0m Found react-native-safe-area-context[0m
+  [36m[1m[Codegen][0m Found react-native-screens[0m
+  [36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in react-native.config.js[0m
+  [36m[1m[Codegen][0m Processing FBReactNativeSpec[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Processing rncore[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Processing safeareacontext[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Supported Apple platforms: ios, macos, tvos, visionos for safeareacontext[0m
+  [36m[1m[Codegen][0m Processing rnscreens[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Supported Apple platforms: ios, tvos, visionos for rnscreens[0m
+  [36m[1m[Codegen][0m Error: Unknown prop type for "environment": "undefined"[0m
+  [36m[1m[Codegen][0m [33mDone.[0m
+
+[!] Invalid `Podfile` file: [!] /Users/o.chetverykova/.nvm/versions/node/v20.19.6/bin/node ./../node_modules/react-native/scripts/generate-codegen-artifacts.js -p /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios/.. -o /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios -t ios
+
+[36m[1m[Codegen][0m Analyzing /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/package.json[0m
+[36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the app.[0m
+[36m[1m[Codegen][0m [33mThe "codegenConfig" field is not defined in package.json. Assuming there is nothing to generate at the app level.[0m
+[36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the project dependencies.[0m
+[36m[1m[Codegen][0m Found react-native[0m
+[36m[1m[Codegen][0m Found react-native-safe-area-context[0m
+[36m[1m[Codegen][0m Found react-native-screens[0m
+[36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in react-native.config.js[0m
+[36m[1m[Codegen][0m Processing FBReactNativeSpec[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Processing rncore[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Processing safeareacontext[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Supported Apple platforms: ios, macos, tvos, visionos for safeareacontext[0m
+[36m[1m[Codegen][0m Processing rnscreens[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Supported Apple platforms: ios, tvos, visionos for rnscreens[0m
+[36m[1m[Codegen][0m Error: Unknown prop type for "environment": "undefined"[0m
+[36m[1m[Codegen][0m [33mDone.[0m
+.
+
+ #  from /Users/o.chetverykova/Downloads/ReactNative/WriterlySpiritQuizRush/ios/Podfile:20
+ #  -------------------------------------------
+ #  
+ >    use_react_native!(
+ #      :path => config[:reactNativePath],
+ #  -------------------------------------------
+
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:335:in `rescue in block in from_ruby'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:329:in `block in from_ruby'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:50:in `instance_eval'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:50:in `initialize'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:327:in `new'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:327:in `from_ruby'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-core-1.15.2/lib/cocoapods-core/podfile.rb:293:in `from_file'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/config.rb:206:in `podfile'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command.rb:160:in `verify_podfile_exists!'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command/install.rb:46:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/claide-1.1.0/lib/claide/command.rb:334:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command.rb:52:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/bin/pod:55:in `<top (required)>'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/bin/pod:25:in `load'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/bin/pod:25:in `<main>'

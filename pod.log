@@ -1,0 +1,9 @@
+[!] No `Podfile' found in the project directory.
+
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command.rb:161:in `verify_podfile_exists!'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command/install.rb:46:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/claide-1.1.0/lib/claide/command.rb:334:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/lib/cocoapods/command.rb:52:in `run'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/cocoapods-1.15.2/bin/pod:55:in `<top (required)>'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/bin/pod:25:in `load'
+/Users/o.chetverykova/.rbenv/versions/3.3.6/bin/pod:25:in `<main>'
