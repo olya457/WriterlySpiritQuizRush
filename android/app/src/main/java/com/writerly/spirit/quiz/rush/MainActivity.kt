@@ -1,4 +1,4 @@
-package com.writerlyspiritquizrush
+package com.writerly.spirit.quiz.rush
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
