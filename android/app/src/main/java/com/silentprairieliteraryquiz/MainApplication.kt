@@ -1,4 +1,4 @@
-package com.writerly.spirit.quiz.rush
+package com.silentprairieliteraryquiz
 
 import android.app.Application
 import com.facebook.react.PackageList

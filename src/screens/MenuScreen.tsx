@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
 
   btnGradBack: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#2C6BFF',
+    backgroundColor: '#437cadff',
     opacity: 0.95,
   },
   btnGradGlow1: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     width: 190,
     height: 190,
     borderRadius: 190,
-    backgroundColor: '#C027FF',
+    backgroundColor: '#437cadff',
     opacity: 0.9,
   },
   btnGradGlow2: {
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     width: 220,
     height: 220,
     borderRadius: 220,
-    backgroundColor: '#7B4DFF',
+    backgroundColor: '#437cadff',
     opacity: 0.35,
   },
   btnContent: {

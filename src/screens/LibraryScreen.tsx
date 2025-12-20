@@ -24,6 +24,7 @@ const { width: W, height: H } = Dimensions.get('window');
 const IS_TINY = H < 680;
 
 const BG = require('../assets/background.png');
+
 type Novel = {
   id: number;
   title: string;
@@ -215,8 +216,8 @@ export default function LibraryScreen({ navigation }: Props) {
       </View>
 
       <Animated.View style={[styles.wrap, anim]}>
-        <ScrollView 
-          contentContainerStyle={{ paddingBottom: 40, alignItems: 'center' }} 
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 80, alignItems: 'center' }}
           showsVerticalScrollIndicator={false}
         >
           {NOVELS.map((n) => {
@@ -334,10 +335,10 @@ const styles = StyleSheet.create({
   coinText: { color: 'rgba(255,255,255,0.92)', fontWeight: '900' },
 
   wrap: { flex: 1, paddingTop: IS_TINY ? 100 : 115 },
-  title: { 
-    color: '#fff', 
-    fontWeight: '900', 
-    fontSize: 20, 
+  title: {
+    color: '#fff',
+    fontWeight: '900',
+    fontSize: 20,
     textAlign: 'center',
     flex: 1,
   },
@@ -382,20 +383,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 10,
-    backgroundColor: '#7A42FF',
+    backgroundColor: '#437cadff',
     minWidth: 150,
     alignItems: 'center',
   },
   exchangeText: { color: '#fff', fontWeight: '900', fontSize: 11 },
 
   row2: { flexDirection: 'row', justifyContent: 'space-between', gap: 10, marginTop: 8 },
-  openBtn: { flex: 1, paddingVertical: 8, borderRadius: 10, backgroundColor: '#7A42FF', alignItems: 'center' },
+  openBtn: { flex: 1, paddingVertical: 8, borderRadius: 10, backgroundColor: '#2464b8ff', alignItems: 'center' },
   openText: { color: '#fff', fontWeight: '900', fontSize: 11 },
   shareBtn: {
     flex: 1,
     paddingVertical: 8,
     borderRadius: 10,
-    backgroundColor: '#5A3DB7',
+    backgroundColor: '#2464b8ff',
     alignItems: 'center',
     opacity: Platform.OS === 'android' ? 0.96 : 1,
   },

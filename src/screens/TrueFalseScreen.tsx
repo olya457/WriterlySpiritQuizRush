@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
   },
   hudLeft: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   hudRight: { flexDirection: 'row', alignItems: 'center' },
-  hudHeart: { color: '#E56BFF', fontSize: 16, fontWeight: '900' },
+  hudHeart: { color: '#437cadff', fontSize: 16, fontWeight: '900' },
   hudText: { color: 'rgba(255,255,255,0.92)', fontWeight: '900' },
 
   contentWrap: { flex: 1, alignItems: 'center', paddingHorizontal: 16 },
@@ -456,7 +456,7 @@ const styles = StyleSheet.create({
   cardSub: { color: 'rgba(255,255,255,0.78)', textAlign: 'center' },
 
   btnRow: { marginTop: IS_TINY ? 10 : 12, gap: 10, alignItems: 'center' },
-  btnSmall: { borderRadius: 10, backgroundColor: '#7A42FF', alignItems: 'center' },
+  btnSmall: { borderRadius: 10, backgroundColor: '#437cadff', alignItems: 'center' },
   btnSmallText: { color: '#fff', fontWeight: '900', fontSize: 12 },
 
   qCard: {
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
   },
   dot: { width: 7, height: 7, borderRadius: 3.5, backgroundColor: 'rgba(255,255,255,0.18)' },
   dotDone: { backgroundColor: 'rgba(150,200,255,0.55)' },
-  dotActive: { backgroundColor: '#7A42FF' },
+  dotActive: { backgroundColor: '#437cadff' },
 
   tfRow: {
     marginTop: IS_TINY ? 10 : 12,
@@ -516,12 +516,12 @@ const styles = StyleSheet.create({
 
   bottomBtns: { marginTop: IS_TINY ? 10 : 12, alignItems: 'center', gap: 10 },
 
-  btnConfirm: { borderRadius: 10, backgroundColor: '#7A42FF', alignItems: 'center' },
+  btnConfirm: { borderRadius: 10, backgroundColor: '#437cadff', alignItems: 'center' },
   btnConfirmText: { color: '#fff', fontWeight: '900', fontSize: 12 },
 
   btnMenu: {
     borderRadius: 10,
-    backgroundColor: '#5A3DB7',
+    backgroundColor: '#437cadff',
     alignItems: 'center',
     opacity: Platform.OS === 'android' ? 0.96 : 1,
   },

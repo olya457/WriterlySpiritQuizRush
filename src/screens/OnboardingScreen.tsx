@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Dimensions,
+  Platform,
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
@@ -29,29 +30,25 @@ export default function OnboardingScreen({ navigation }: Props) {
     () => [
       {
         title: 'Discover the World of Classic Literature',
-        text:
-          'Step into a new journey through timeless stories, iconic authors, and unforgettable characters.',
+        text: 'Step into a new journey through timeless stories, iconic authors, and unforgettable characters.',
         image: ONB.s1,
         button: 'Next',
       },
       {
         title: 'Choose Your Challenge',
-        text:
-          'Test your knowledge in the Classic Quiz or try the fast-paced True or False mode — the choice is yours.',
+        text: 'Test your knowledge in the Classic Quiz or try the fast-paced True or False mode — the choice is yours.',
         image: ONB.s2,
         button: 'Next',
       },
       {
         title: 'Earn Bookcoins as You Play',
-        text:
-          'Every correct answer brings you closer to unlocking exclusive literary novels in your personal Library.',
+        text: 'Every correct answer brings you closer to unlocking exclusive literary novels in your personal Library.',
         image: ONB.s3,
         button: 'Next',
       },
       {
         title: 'Build Your Collection',
-        text:
-          'Exchange Bookcoins for beautifully crafted stories and expand your literary universe one win at a time.',
+        text: 'Exchange Bookcoins for beautifully crafted stories and expand your literary universe one win at a time.',
         image: ONB.s4,
         button: 'Begin',
       },
@@ -69,7 +66,7 @@ export default function OnboardingScreen({ navigation }: Props) {
   };
 
   const cardW = Math.min(W - 34, 340);
-  const cardTop = 100; 
+  const cardTop = 100;
   const imgH = IS_TINY ? Math.min(H * 0.46, 360) : IS_SMALL ? Math.min(H * 0.52, 420) : Math.min(H * 0.56, 460);
 
   return (
@@ -81,7 +78,11 @@ export default function OnboardingScreen({ navigation }: Props) {
         </View>
 
         <View style={styles.bottom}>
-          <Image source={step.image} style={[styles.onbImage, { height: imgH, width: Math.min(W * 0.86, 360) }]} resizeMode="contain" />
+          <Image 
+            source={step.image} 
+            style={[styles.onbImage, { height: imgH, width: Math.min(W * 0.86, 360) }]} 
+            resizeMode="contain" 
+          />
 
           <Pressable style={styles.btn} onPress={onNext}>
             <Text style={styles.btnText}>{step.button}</Text>
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
   },
-
   topCard: {
     borderRadius: 18,
     paddingVertical: 14,
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(4, 10, 30, 0.55)',
     borderWidth: 2,
     borderColor: 'rgba(130, 220, 255, 0.55)',
+    zIndex: 10,
   },
   topTitle: {
     color: '#FFFFFF',
@@ -130,29 +131,26 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   topTextTiny: { fontSize: 12, lineHeight: 17 },
-
   bottom: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingBottom: IS_TINY ? 18 : 22,
+    justifyContent: 'flex-start',
+    paddingTop: Platform.OS === 'android' ? 10 : 20, 
   },
   onbImage: {
     marginBottom: 14,
   },
-
   btn: {
     minWidth: 92,
     paddingHorizontal: 18,
     paddingVertical: 10,
     borderRadius: 10,
-    backgroundColor: '#6E5BFF', 
+    backgroundColor: '#437cadff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   btnText: { color: '#fff', fontWeight: '800', fontSize: 14 },
-
   dots: {
     flexDirection: 'row',
     gap: 8,

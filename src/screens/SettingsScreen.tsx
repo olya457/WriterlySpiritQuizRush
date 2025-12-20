@@ -18,7 +18,7 @@ import type { RootStackParamList } from '../navigation/types';
 type Props = NativeStackScreenProps<RootStackParamList, 'Settings'>;
 
 const { width: W, height: H } = Dimensions.get('window');
-const IS_TINY = H < 680; 
+const IS_TINY = H < 680;
 const IS_SMALL = H < 750;
 
 const BG = require('../assets/background.png');
@@ -43,47 +43,49 @@ export default function SettingsScreen({ navigation }: Props) {
   return (
     <ImageBackground source={BG} style={styles.bg} resizeMode="cover">
       <View style={styles.root}>
-        <View style={[styles.cardGlow, { width: CARD_W, height: CARD_H }]}>
-          <View style={styles.cardInner}>
-            <Text style={styles.cardTitle}>Settings</Text>
+        <View style={[styles.contentShift, { width: CARD_W, height: CARD_H }]}>
+          <View style={styles.cardGlow}>
+            <View style={styles.cardInner}>
+              <Text style={styles.cardTitle}>Settings</Text>
 
-            <View style={[styles.row, IS_TINY && { height: 42 }]}>
-              <Text style={styles.rowText}>Vibration</Text>
-              <View style={styles.rightBlock}>
-                <Text style={styles.iconPurple}>📳</Text>
-                <Switch
-                  value={vibrationOn}
-                  onValueChange={setVibrationOn}
-                  trackColor={{ false: 'rgba(255,255,255,0.18)', true: 'rgba(180,90,255,0.45)' }}
-                  thumbColor={vibrationOn ? '#E56BFF' : '#C7CBD1'}
-                  style={Platform.OS === 'ios' ? { transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] } : {}}
-                />
+              <View style={[styles.row, IS_TINY && { height: 42 }]}>
+                <Text style={styles.rowText}>Vibration</Text>
+                <View style={styles.rightBlock}>
+                  <Text style={styles.iconPurple}>📳</Text>
+                  <Switch
+                    value={vibrationOn}
+                    onValueChange={setVibrationOn}
+                    trackColor={{ false: 'rgba(255,255,255,0.18)', true: 'rgba(130, 165, 225, 0.45)' }}
+                    thumbColor={vibrationOn ? '#437cadff' : '#C7CBD1'}
+                    style={Platform.OS === 'ios' ? { transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] } : {}}
+                  />
+                </View>
               </View>
+
+              <Pressable style={[styles.rowPress, IS_TINY && { height: 42 }]} onPress={() => setShowAbout(true)}>
+                <Text style={styles.rowText}>About App</Text>
+                <Text style={styles.iconPurple}>ⓘ</Text>
+              </Pressable>
+
+              <Pressable style={[styles.rowPress, IS_TINY && { height: 42 }]} onPress={onShare}>
+                <Text style={styles.rowText}>Share App</Text>
+                <Text style={styles.iconPurple}>↗</Text>
+              </Pressable>
             </View>
-
-            <Pressable style={[styles.rowPress, IS_TINY && { height: 42 }]} onPress={() => setShowAbout(true)}>
-              <Text style={styles.rowText}>About App</Text>
-              <Text style={styles.iconPurple}>ⓘ</Text>
-            </Pressable>
-
-            <Pressable style={[styles.rowPress, IS_TINY && { height: 42 }]} onPress={onShare}>
-              <Text style={styles.rowText}>Share App</Text>
-              <Text style={styles.iconPurple}>↗</Text>
-            </Pressable>
           </View>
         </View>
 
-        <Pressable 
-          style={[styles.menuBtn, { width: MENU_W, bottom: IS_TINY ? 40 : 60 }]} 
+        <Pressable
+          style={[styles.menuBtn, { width: MENU_W, bottom: (IS_TINY ? 40 : 60) + 40 }]}
           onPress={() => navigation.goBack()}
         >
           <Text style={styles.menuBtnText}>Menu</Text>
         </Pressable>
 
-        <Modal 
-          visible={showAbout} 
-          transparent 
-          animationType="fade" 
+        <Modal
+          visible={showAbout}
+          transparent
+          animationType="fade"
           statusBarTranslucent={true}
           onRequestClose={() => setShowAbout(false)}
         >
@@ -98,14 +100,14 @@ export default function SettingsScreen({ navigation }: Props) {
                   showsVerticalScrollIndicator={false}
                 >
                   <Text style={styles.aboutText}>
-                    Writerly Spirit: Quiz Rush is a literary quiz experience inspired by classic fiction, iconic authors,
-                    and timeless stories.{"\n\n"}
-                    The app invites users to test their knowledge through thoughtfully crafted quiz modes, collect
-                    bookcoins, and unlock original artistic novellas inspired by the world of literature.{"\n\n"}
-                    Designed with a clean neon aesthetic and a calm, immersive atmosphere, the experience focuses on
-                    curiosity, learning, and enjoyment without pressure or complexity.{"\n\n"}
-                    Whether answering classic multiple-choice questions or choosing between true and false, every session
-                    is a chance to rediscover literature in a playful, modern way.
+                    Silent Prairie: Literary Quiz is a literary quiz experience inspired by classic fiction, iconic authors, and timeless
+                    stories.{"\n\n"}
+                    The app invites users to test their knowledge through thoughtfully crafted quiz modes, collect bookcoins, and unlock
+                    original artistic novellas inspired by the world of literature.{"\n\n"}
+                    Designed with a clean neon aesthetic and a calm, immersive atmosphere, the experience focuses on curiosity,
+                    learning, and enjoyment without pressure or complexity.{"\n\n"}
+                    Whether answering classic multiple-choice questions or choosing between true and false, every session is a chance
+                    to rediscover literature in a playful, modern way.
                   </Text>
                 </ScrollView>
               </View>
@@ -133,12 +135,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+  contentShift: {
+    transform: [{ translateY: -30 }],
+  },
+
   cardGlow: {
+    flex: 1,
     borderRadius: R,
     borderWidth: 3,
     borderColor: 'rgba(90,205,255,0.85)',
-    backgroundColor: 'rgba(12, 12, 35, 0.92)', 
-    overflow: 'hidden', 
+    backgroundColor: 'rgba(12, 12, 35, 0.92)',
+    overflow: 'hidden',
     shadowColor: 'rgba(90,205,255,1)',
     shadowOpacity: 0.4,
     shadowRadius: 15,
@@ -200,7 +207,7 @@ const styles = StyleSheet.create({
   },
 
   iconPurple: {
-    color: '#E56BFF',
+    color: '#437cadff',
     fontSize: IS_TINY ? 16 : 18,
     fontWeight: '900',
   },
@@ -210,7 +217,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: IS_TINY ? 10 : 12,
     alignItems: 'center',
-    backgroundColor: '#7A42FF',
+    backgroundColor: '#437cadff',
     shadowColor: '#000',
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -220,11 +227,11 @@ const styles = StyleSheet.create({
 
   modalWrap: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.85)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 40, 
+    paddingVertical: 40,
   },
 
   aboutGlow: {
@@ -255,7 +262,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 40,
-    backgroundColor: '#7A42FF',
+    backgroundColor: '#437cadff',
   },
   closeBtnText: { color: '#FFFFFF', fontWeight: '900', fontSize: 14 },
 });

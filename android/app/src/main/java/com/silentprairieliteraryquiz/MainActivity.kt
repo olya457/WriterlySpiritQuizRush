@@ -1,4 +1,4 @@
-package com.writerly.spirit.quiz.rush
+package com.silentprairieliteraryquiz
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -71,7 +71,6 @@ function shuffle<T>(arr: T[]) {
 
 function buildPack(all: Q[], count: number): Q[] {
   if (all.length >= count) return shuffle(all).slice(0, count);
-
   const out: Q[] = [];
   let safety = 0;
   while (out.length < count && safety < 500) {
@@ -84,11 +83,9 @@ function buildPack(all: Q[], count: number): Q[] {
 type Phase = 'intro' | 'question' | 'feedback' | 'win' | 'lose';
 
 export default function ClassicQuizScreen({ navigation }: Props) {
-  const QUIZ_COUNT = 10; 
-
+  const QUIZ_COUNT = 10;
   const [pack, setPack] = useState<Q[]>(() => buildPack(ALL_QUESTIONS, QUIZ_COUNT));
   const [phase, setPhase] = useState<Phase>('intro');
-
   const [answered, setAnswered] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [lives, setLives] = useState(3);
@@ -108,11 +105,9 @@ export default function ClassicQuizScreen({ navigation }: Props) {
     fade.stopAnimation();
     translateY.stopAnimation();
     scale.stopAnimation();
-
     fade.setValue(0);
     translateY.setValue(46);
     scale.setValue(0.92);
-
     Animated.parallel([
       Animated.timing(fade, { toValue: 1, duration: 240, useNativeDriver: true }),
       Animated.timing(translateY, { toValue: 0, duration: 320, useNativeDriver: true }),
@@ -127,7 +122,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
   const goMenu = () => navigation.replace('Menu');
 
   const startQuiz = () => {
-    rewardedRef.current = false; 
+    rewardedRef.current = false;
     setPack(buildPack(ALL_QUESTIONS, QUIZ_COUNT));
     setLives(3);
     setScore(0);
@@ -144,26 +139,23 @@ export default function ClassicQuizScreen({ navigation }: Props) {
     setLastOk(ok);
     setPhase('feedback');
   };
+
   const rewardCoinsOnce = async (amount: number) => {
     if (rewardedRef.current) return;
     rewardedRef.current = true;
     try {
       if (amount > 0) await addCoins(amount);
-    } catch {
-    }
+    } catch {}
   };
+
   const next = () => {
     if (!q || selected === null || lastOk === null) return;
-
     const nextLives = lastOk ? lives : lives - 1;
     const nextScore = lastOk ? score + 1 : score;
-
     setLives(nextLives);
     setScore(nextScore);
-
     setSelected(null);
     setLastOk(null);
-
     const nextAnswered = answered + 1;
     if (nextLives <= 0) {
       void rewardCoinsOnce(nextScore);
@@ -175,7 +167,6 @@ export default function ClassicQuizScreen({ navigation }: Props) {
       setPhase('win');
       return;
     }
-
     setAnswered(nextAnswered);
     setPhase('question');
   };
@@ -187,11 +178,10 @@ export default function ClassicQuizScreen({ navigation }: Props) {
       ? Math.min(H * 0.34, 300)
       : Math.min(H * 0.38, 350);
 
-  const DOWN = IS_TINY ? 58 : 80;
+  const DOWN = IS_TINY ? 28 : 45;
 
   const BTN_W = IS_BIG ? 180 : IS_TINY ? 128 : 145;
   const BTN_PY = IS_BIG ? 12 : IS_TINY ? 9 : 10;
-
   const INTRO_IMG_SHIFT = -20;
 
   const contentAnim = useMemo(
@@ -215,7 +205,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
         </View>
       )}
 
-      <View style={[styles.contentWrap, { paddingTop: (IS_TINY ? 52 : 60) + DOWN }]}>
+      <View style={[styles.contentWrap, { paddingTop: (IS_TINY ? 40 : 50) + DOWN }]}>
         {phase === 'intro' && (
           <Animated.View style={[styles.screen, contentAnim]}>
             <Image
@@ -223,7 +213,6 @@ export default function ClassicQuizScreen({ navigation }: Props) {
               style={{ width: cardW, height: topImageH, marginTop: INTRO_IMG_SHIFT }}
               resizeMode="contain"
             />
-
             <View style={[styles.card, { width: cardW, padding: IS_BIG ? 18 : 16 }]}>
               <Text style={[styles.cardTitle, { fontSize: IS_BIG ? 18 : IS_TINY ? 15 : 16 }]}>
                 Classic Quiz Challenge
@@ -233,7 +222,6 @@ export default function ClassicQuizScreen({ navigation }: Props) {
                 literary instincts can take you.
               </Text>
             </View>
-
             <View style={styles.btnRow}>
               <Pressable style={[styles.btnSmall, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={startQuiz}>
                 <Text style={styles.btnSmallText}>Start</Text>
@@ -248,11 +236,9 @@ export default function ClassicQuizScreen({ navigation }: Props) {
         {(phase === 'question' || phase === 'feedback') && q && (
           <Animated.View style={[styles.screen, contentAnim]}>
             <Image source={IMG_QUESTION} style={{ width: cardW, height: topImageH }} resizeMode="contain" />
-
             <View style={[styles.qCard, { width: cardW, padding: IS_BIG ? 14 : 12 }]}>
               <Text style={[styles.qTitle, { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13 }]}>{q.q}</Text>
             </View>
-
             <View style={[styles.dotsRow, { width: cardW }]}>
               {Array.from({ length: totalDots }).map((_, i) => {
                 const active = i === answered;
@@ -260,14 +246,12 @@ export default function ClassicQuizScreen({ navigation }: Props) {
                 return <View key={`dot-${i}`} style={[styles.dot, done && styles.dotDone, active && styles.dotActive]} />;
               })}
             </View>
-
             <View style={[styles.opts, { width: cardW }]}>
               {q.options.map((opt, i) => {
                 const locked = phase === 'feedback';
                 const correct = phase === 'feedback' && i === q.correctIndex;
                 const wrongPick = phase === 'feedback' && selected === i && i !== q.correctIndex;
                 const active = selected === i && phase === 'question';
-
                 return (
                   <Pressable
                     key={`${q.id}-${i}`}
@@ -286,37 +270,21 @@ export default function ClassicQuizScreen({ navigation }: Props) {
                 );
               })}
             </View>
-
             <View style={styles.bottomBtns}>
-              {phase === 'question' ? (
-                <>
-                  <Pressable
-                    style={[
-                      styles.btnConfirm,
-                      { width: BTN_W, paddingVertical: BTN_PY },
-                      selected === null && { opacity: 0.45 },
-                    ]}
-                    onPress={confirm}
-                    disabled={selected === null}
-                  >
-                    <Text style={styles.btnConfirmText}>Confirm</Text>
-                  </Pressable>
-
-                  <Pressable style={[styles.btnMenu, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={() => setShowExit(true)}>
-                    <Text style={styles.btnMenuText}>Menu</Text>
-                  </Pressable>
-                </>
-              ) : (
-                <>
-                  <Pressable style={[styles.btnConfirm, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={next}>
-                    <Text style={styles.btnConfirmText}>Next</Text>
-                  </Pressable>
-
-                  <Pressable style={[styles.btnMenu, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={() => setShowExit(true)}>
-                    <Text style={styles.btnMenuText}>Menu</Text>
-                  </Pressable>
-                </>
-              )}
+              <Pressable
+                style={[
+                  styles.btnConfirm,
+                  { width: BTN_W, paddingVertical: BTN_PY },
+                  phase === 'question' && selected === null && { opacity: 0.45 },
+                ]}
+                onPress={phase === 'question' ? confirm : next}
+                disabled={phase === 'question' && selected === null}
+              >
+                <Text style={styles.btnConfirmText}>{phase === 'question' ? 'Confirm' : 'Next'}</Text>
+              </Pressable>
+              <Pressable style={[styles.btnMenu, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={() => setShowExit(true)}>
+                <Text style={styles.btnMenuText}>Menu</Text>
+              </Pressable>
             </View>
           </Animated.View>
         )}
@@ -369,8 +337,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
             <Text style={styles.modalText}>
               You&apos;ll lose this round&apos;s progress if you leave now. Do you want to continue or exit to menu?
             </Text>
-
-            <View style={styles.modalRow}>
+            <div style={styles.modalRow}>
               <Pressable
                 style={[styles.modalBtn, { backgroundColor: '#8B2B2B' }]}
                 onPress={() => {
@@ -380,11 +347,10 @@ export default function ClassicQuizScreen({ navigation }: Props) {
               >
                 <Text style={styles.modalBtnText}>Confirm</Text>
               </Pressable>
-
               <Pressable style={[styles.modalBtn, { backgroundColor: '#1F6B2F' }]} onPress={() => setShowExit(false)}>
                 <Text style={styles.modalBtnText}>Cancel</Text>
               </Pressable>
-            </View>
+            </div>
           </View>
         </View>
       </Modal>
@@ -394,7 +360,6 @@ export default function ClassicQuizScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   bg: { flex: 1 },
-
   hud: {
     position: 'absolute',
     top: 0,
@@ -409,10 +374,8 @@ const styles = StyleSheet.create({
   hudRight: { flexDirection: 'row', alignItems: 'center' },
   hudHeart: { color: '#E56BFF', fontSize: 16, fontWeight: '900' },
   hudText: { color: 'rgba(255,255,255,0.92)', fontWeight: '900' },
-
   contentWrap: { flex: 1, alignItems: 'center', paddingHorizontal: 16 },
   screen: { alignItems: 'center' },
-
   card: {
     marginTop: IS_TINY ? 10 : 14,
     borderRadius: 14,
@@ -422,11 +385,9 @@ const styles = StyleSheet.create({
   },
   cardTitle: { color: '#fff', fontWeight: '900', textAlign: 'center', marginBottom: 8 },
   cardSub: { color: 'rgba(255,255,255,0.78)', textAlign: 'center' },
-
   btnRow: { marginTop: IS_TINY ? 10 : 12, gap: 10, alignItems: 'center' },
-  btnSmall: { borderRadius: 10, backgroundColor: '#7A42FF', alignItems: 'center' },
+  btnSmall: { borderRadius: 10, backgroundColor: '#437cadff', alignItems: 'center' },
   btnSmallText: { color: '#fff', fontWeight: '900', fontSize: 12 },
-
   qCard: {
     marginTop: IS_TINY ? 8 : 10,
     borderRadius: 12,
@@ -435,7 +396,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.35)',
   },
   qTitle: { color: '#fff', fontWeight: '900', textAlign: 'center' },
-
   dotsRow: {
     marginTop: 10,
     flexDirection: 'row',
@@ -444,8 +404,7 @@ const styles = StyleSheet.create({
   },
   dot: { width: 7, height: 7, borderRadius: 3.5, backgroundColor: 'rgba(255,255,255,0.18)' },
   dotDone: { backgroundColor: 'rgba(150,200,255,0.55)' },
-  dotActive: { backgroundColor: '#7A42FF' },
-
+  dotActive: { backgroundColor: '#437cadff' },
   opts: { marginTop: IS_TINY ? 10 : 12, gap: IS_TINY ? 8 : 10 },
   opt: {
     borderRadius: 10,
@@ -460,20 +419,16 @@ const styles = StyleSheet.create({
   optCorrect: { borderColor: 'rgba(90,220,140,0.95)', backgroundColor: 'rgba(30,120,60,0.35)' },
   optWrong: { borderColor: 'rgba(255,90,90,0.95)', backgroundColor: 'rgba(140,30,30,0.35)' },
   optText: { color: '#fff', fontWeight: '800', textAlign: 'center' },
-
   bottomBtns: { marginTop: IS_TINY ? 10 : 12, alignItems: 'center', gap: 10 },
-
-  btnConfirm: { borderRadius: 10, backgroundColor: '#7A42FF', alignItems: 'center' },
+  btnConfirm: { borderRadius: 10, backgroundColor: '#437cadff', alignItems: 'center' },
   btnConfirmText: { color: '#fff', fontWeight: '900', fontSize: 12 },
-
   btnMenu: {
     borderRadius: 10,
-    backgroundColor: '#5A3DB7',
+    backgroundColor: '#1761a2ff',
     alignItems: 'center',
     opacity: Platform.OS === 'android' ? 0.96 : 1,
   },
   btnMenuText: { color: '#fff', fontWeight: '900', fontSize: 12 },
-
   modalWrap: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.55)',
@@ -490,7 +445,6 @@ const styles = StyleSheet.create({
   },
   modalTitle: { color: '#fff', fontWeight: '900', fontSize: 14, textAlign: 'center', marginBottom: 8 },
   modalText: { color: 'rgba(255,255,255,0.75)', fontSize: 12, textAlign: 'center', lineHeight: 16 },
-
   modalRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 14, gap: 10 },
   modalBtn: { flex: 1, paddingVertical: 10, borderRadius: 10, alignItems: 'center' },
   modalBtnText: { color: '#fff', fontWeight: '900', fontSize: 12 },

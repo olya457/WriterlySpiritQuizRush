@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 12,
-    backgroundColor: '#7A42FF',
+    backgroundColor: '#437cadff',
   },
   shareText: { color: '#fff', fontWeight: '900', fontSize: 12 },
 
@@ -132,13 +132,13 @@ const styles = StyleSheet.create({
     width: 200,
     paddingVertical: 10,
     borderRadius: 12,
-    backgroundColor: '#7A42FF',
+    backgroundColor: '#437cadff',
     alignItems: 'center',
   },
   bigShareText: { color: '#fff', fontWeight: '900' },
 
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 16 },
   title: { color: '#fff', fontSize: 18, fontWeight: '900', marginBottom: 12 },
-  btn: { paddingHorizontal: 18, paddingVertical: 12, borderRadius: 12, backgroundColor: '#7A42FF' },
+  btn: { paddingHorizontal: 18, paddingVertical: 12, borderRadius: 12, backgroundColor: '#437cadff' },
   btnText: { color: '#fff', fontWeight: '900' },
 });
