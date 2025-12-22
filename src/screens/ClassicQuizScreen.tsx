@@ -84,6 +84,7 @@ type Phase = 'intro' | 'question' | 'feedback' | 'win' | 'lose';
 
 export default function ClassicQuizScreen({ navigation }: Props) {
   const QUIZ_COUNT = 10;
+
   const [pack, setPack] = useState<Q[]>(() => buildPack(ALL_QUESTIONS, QUIZ_COUNT));
   const [phase, setPhase] = useState<Phase>('intro');
   const [answered, setAnswered] = useState(0);
@@ -91,9 +92,10 @@ export default function ClassicQuizScreen({ navigation }: Props) {
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
   const [lastOk, setLastOk] = useState<boolean | null>(null);
-  const [showExit, setShowExit] = useState(false);
-  const rewardedRef = useRef(false);
 
+  const [showExit, setShowExit] = useState(false);
+
+  const rewardedRef = useRef(false);
   const q = pack[answered];
   const totalDots = QUIZ_COUNT;
 
@@ -133,6 +135,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
   };
 
   const restart = () => startQuiz();
+
   const confirm = () => {
     if (selected === null || !q) return;
     const ok = selected === q.correctIndex;
@@ -152,23 +155,35 @@ export default function ClassicQuizScreen({ navigation }: Props) {
     if (!q || selected === null || lastOk === null) return;
     const nextLives = lastOk ? lives : lives - 1;
     const nextScore = lastOk ? score + 1 : score;
+
     setLives(nextLives);
     setScore(nextScore);
     setSelected(null);
     setLastOk(null);
+
     const nextAnswered = answered + 1;
+
     if (nextLives <= 0) {
       void rewardCoinsOnce(nextScore);
       setPhase('lose');
       return;
     }
+
     if (nextAnswered >= QUIZ_COUNT) {
       void rewardCoinsOnce(nextScore * 3);
       setPhase('win');
       return;
     }
+
     setAnswered(nextAnswered);
     setPhase('question');
+  };
+
+  const openExitConfirm = () => setShowExit(true);
+  const cancelExit = () => setShowExit(false);
+  const confirmExit = () => {
+    setShowExit(false);
+    goMenu();
   };
 
   const cardW = Math.min(W * 0.92, 390);
@@ -217,7 +232,12 @@ export default function ClassicQuizScreen({ navigation }: Props) {
               <Text style={[styles.cardTitle, { fontSize: IS_BIG ? 18 : IS_TINY ? 15 : 16 }]}>
                 Classic Quiz Challenge
               </Text>
-              <Text style={[styles.cardSub, { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 }]}>
+              <Text
+                style={[
+                  styles.cardSub,
+                  { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 },
+                ]}
+              >
                 Put your knowledge of timeless literature to the test. Think carefully, choose wisely, and see how far your
                 literary instincts can take you.
               </Text>
@@ -239,6 +259,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
             <View style={[styles.qCard, { width: cardW, padding: IS_BIG ? 14 : 12 }]}>
               <Text style={[styles.qTitle, { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13 }]}>{q.q}</Text>
             </View>
+
             <View style={[styles.dotsRow, { width: cardW }]}>
               {Array.from({ length: totalDots }).map((_, i) => {
                 const active = i === answered;
@@ -246,6 +267,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
                 return <View key={`dot-${i}`} style={[styles.dot, done && styles.dotDone, active && styles.dotActive]} />;
               })}
             </View>
+
             <View style={[styles.opts, { width: cardW }]}>
               {q.options.map((opt, i) => {
                 const locked = phase === 'feedback';
@@ -270,6 +292,7 @@ export default function ClassicQuizScreen({ navigation }: Props) {
                 );
               })}
             </View>
+
             <View style={styles.bottomBtns}>
               <Pressable
                 style={[
@@ -282,7 +305,8 @@ export default function ClassicQuizScreen({ navigation }: Props) {
               >
                 <Text style={styles.btnConfirmText}>{phase === 'question' ? 'Confirm' : 'Next'}</Text>
               </Pressable>
-              <Pressable style={[styles.btnMenu, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={() => setShowExit(true)}>
+
+              <Pressable style={[styles.btnMenu, { width: BTN_W, paddingVertical: BTN_PY }]} onPress={openExitConfirm}>
                 <Text style={styles.btnMenuText}>Menu</Text>
               </Pressable>
             </View>
@@ -294,7 +318,12 @@ export default function ClassicQuizScreen({ navigation }: Props) {
             <Image source={IMG_LOSE} style={{ width: cardW, height: topImageH }} resizeMode="contain" />
             <View style={[styles.card, { width: cardW, padding: IS_BIG ? 18 : 16 }]}>
               <Text style={[styles.cardTitle, { fontSize: IS_BIG ? 18 : IS_TINY ? 15 : 16 }]}>Good Try</Text>
-              <Text style={[styles.cardSub, { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 }]}>
+              <Text
+                style={[
+                  styles.cardSub,
+                  { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 },
+                ]}
+              >
                 This round was tough, but you made progress.{"\n"}BookCoins Received: {score}
               </Text>
             </View>
@@ -314,7 +343,12 @@ export default function ClassicQuizScreen({ navigation }: Props) {
             <Image source={IMG_WIN} style={{ width: cardW, height: topImageH }} resizeMode="contain" />
             <View style={[styles.card, { width: cardW, padding: IS_BIG ? 18 : 16 }]}>
               <Text style={[styles.cardTitle, { fontSize: IS_BIG ? 18 : IS_TINY ? 15 : 16 }]}>You Win!</Text>
-              <Text style={[styles.cardSub, { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 }]}>
+              <Text
+                style={[
+                  styles.cardSub,
+                  { fontSize: IS_BIG ? 14 : IS_TINY ? 12 : 13, lineHeight: IS_BIG ? 20 : 18 },
+                ]}
+              >
                 Brilliant answers and sharp thinking!{"\n"}BookCoins Received: {score * 3}
               </Text>
             </View>
@@ -330,27 +364,21 @@ export default function ClassicQuizScreen({ navigation }: Props) {
         )}
       </View>
 
-      <Modal visible={showExit} transparent animationType="fade" onRequestClose={() => setShowExit(false)}>
+      <Modal visible={showExit} transparent animationType="fade" onRequestClose={cancelExit}>
         <View style={styles.modalWrap}>
           <View style={[styles.modalCard, { width: Math.min(W * 0.90, 360) }]}>
             <Text style={styles.modalTitle}>Exit This Round?</Text>
             <Text style={styles.modalText}>
-              You&apos;ll lose this round&apos;s progress if you leave now. Do you want to continue or exit to menu?
+              You'll lose this round's progress if you leave now. Do you want to continue or exit to menu?
             </Text>
-            <div style={styles.modalRow}>
-              <Pressable
-                style={[styles.modalBtn, { backgroundColor: '#8B2B2B' }]}
-                onPress={() => {
-                  setShowExit(false);
-                  goMenu();
-                }}
-              >
+            <View style={styles.modalRow}>
+              <Pressable style={[styles.modalBtn, { backgroundColor: '#8B2B2B' }]} onPress={confirmExit}>
                 <Text style={styles.modalBtnText}>Confirm</Text>
               </Pressable>
-              <Pressable style={[styles.modalBtn, { backgroundColor: '#1F6B2F' }]} onPress={() => setShowExit(false)}>
+              <Pressable style={[styles.modalBtn, { backgroundColor: '#1F6B2F' }]} onPress={cancelExit}>
                 <Text style={styles.modalBtnText}>Cancel</Text>
               </Pressable>
-            </div>
+            </View>
           </View>
         </View>
       </Modal>
