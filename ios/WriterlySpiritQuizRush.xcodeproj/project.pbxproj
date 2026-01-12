@@ -270,7 +270,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WriterlySpiritQuizRush/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Writerly Spirit Quiz Rush";
+				INFOPLIST_KEY_CFBundleDisplayName = "WimSprit: Quiz Rush";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,7 +303,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = WriterlySpiritQuizRush/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Writerly Spirit Quiz Rush";
+				INFOPLIST_KEY_CFBundleDisplayName = "WimSprit: Quiz Rush";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
